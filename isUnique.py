@@ -43,12 +43,12 @@ def isUnique(useDataStructures: bool, string: str):
     return True
 
 
-def main(argv: list):
+def main():
     # argv = [ isUnique.py, useDataStrucutures (T/F), Word (String) ]
-    if len(argv) != 3:
+    if len(sys.argv) != 3:
         print("Usage: isUnique.py (True/False) word")
-    useDataStructures = bool(argv[1])
-    string = argv[2]
+    useDataStructures = bool(sys.argv[1])
+    string = sys.argv[2]
     result = isUnique(useDataStructures=useDataStructures, string=string)
     print("Result: ", result)
     return result
