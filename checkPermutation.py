@@ -9,6 +9,7 @@ def checkPermutation1(str1: str, str2: str) -> bool:
     return str1 == str2
 
 def checkPermutation2(str1: str, str2: str) -> bool:
+    #TODO: is there a more efficient way to do this?
     pass
 
 def main():
