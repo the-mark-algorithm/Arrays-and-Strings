@@ -33,15 +33,22 @@ def isUnique(useDataStructures: bool, string: str):
             if alphabet[s] > 0: # already found an instance, not unique
                 return False
             alphabet[s] += 1
-        return True
-    else: #todo make own hash table
+    else: #can't use additional data structures
+        #sort the string and for loop through it
+        string.sort()
+        for i in range(len(string)):
+            currChar = string[i]
+            if (i < len(string) - 1) and (currChar == string[i+1]):
+                return False
+    return True
 
-        pass
 
-def main():
+def main(argv: list):
     # argv = [ isUnique.py, useDataStrucutures (T/F), Word (String) ]
-
-    pass
+    if len(argv) != 3:
+        print("Usage: isUnique.py (True/False) word")
+    useDataStructures = bool(argv[1])
+    string = argv[2]
 
 if __name__ == "__main__":
     main()
