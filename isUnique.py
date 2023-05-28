@@ -49,6 +49,9 @@ def main(argv: list):
         print("Usage: isUnique.py (True/False) word")
     useDataStructures = bool(argv[1])
     string = argv[2]
+    result = isUnique(useDataStructures=useDataStructures, string=string)
+    print("Result: ", result)
+    return result
 
 if __name__ == "__main__":
     main()
