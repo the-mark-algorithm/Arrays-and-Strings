@@ -23,12 +23,11 @@ def isPalindromePermutation(string: str) -> bool:
     if (len(string) % 2 != 0):
         foundUnique = False
         for key in alphabet.keys():
-            if alphabet[key] % 2 != 0:
-                if alphabet[key] == 1 and not foundUnique:
-                    foundUnique = True
-                    continue
-                else:
-                    return False
+            if alphabet[key] % 2 != 0 and not foundUnique:
+                foundUnique = True
+                continue
+            else:
+                return False
     return True
 
 def main():
