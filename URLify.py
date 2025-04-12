@@ -8,13 +8,13 @@ import sys
 def URLify(string: str, strLen: int) -> str:
     token = "%20"
     result = ""
-    words = string.split()
+    words = string.split(" ")
     for i in range(len(words)):
         w = words[i]
         if i == 0:
             result += w
         else:
-            result += "%20" + w
+            result += token + w
     return result
 
 
