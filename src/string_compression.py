@@ -7,18 +7,20 @@ import sys
 # You can assume the string has only uppercase and lowercase letters (a - z)
 def stringCompression(string: str) -> str:
     result = ""
-    curr = string[0]
-    count = 1
+    count = 0
+
     for i in range(len(string) - 1):
-        if curr == string[i+1]:
-            count += 1
-        else:
+        curr = string[i]
+        next = string[i+1]
+
+        count += 1
+
+        if curr != next:
             result += curr + str(count)
-            curr = string[i+1]
-            count = 1
-            
-        if (i + 1) == (len(string) - 1):
-                result += string[i+1] + str(count)
+            count = 0
+        
+        if i >= len(string) - 2:
+                result += next + str(count)
 
     if len(result) >= len(string):
         result = string
