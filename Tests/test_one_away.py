@@ -19,7 +19,7 @@ class TestOneAway(unittest.TestCase):
         for item in sys.path:
             print(item)
 
-        # self.assertEqual(oneAway(s1, s2), True, "Should be True")
+        # self.assertEqual(one_away(s1, s2), True, "Should be True")
 
 if __name__ == '__main__':
     unittest.main()
