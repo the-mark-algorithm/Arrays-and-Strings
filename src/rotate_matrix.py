@@ -4,10 +4,10 @@ from torch import Tensor
 
 # Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, 
 # write a method to rotate the image by 90 degrees. Can you do this in place?
-def rotateMatrix(mtx: torch.Tensor, inPlace: bool=False):
+def rotate_matrix(mtx: torch.Tensor, in_place: bool=False):
     print(mtx)
-    N = mtx.shape[0]
-    if inPlace:
+    N = mtx.shape
+    if in_place:
         # TODO: implement implace version
         current_idx = dest_idx = next_idx = (0, 0)
         num_modified = 0
@@ -47,7 +47,7 @@ def main():
             continue
         break
 
-    return rotateMatrix(mtx=mtx, inPlace=inPlace)
+    return rotate_matrix(mtx=mtx, in_place=inPlace)
 
 if __name__ == "__main__":
     main()
