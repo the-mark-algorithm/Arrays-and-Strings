@@ -9,6 +9,9 @@ def string_compression(string: str) -> str:
     result = ""
     count = 0
 
+    if len(string) <= 2:
+        return string
+
     for i in range(len(string) - 1):
         curr = string[i]
         next = string[i+1]
@@ -20,7 +23,7 @@ def string_compression(string: str) -> str:
             count = 0
         
         if i >= len(string) - 2:
-                result += next + str(count)
+            result += next + str(count + 1)
 
     if len(result) >= len(string):
         result = string
