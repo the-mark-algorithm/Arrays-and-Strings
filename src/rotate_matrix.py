@@ -1,14 +1,15 @@
 import sys
-import torch
-from torch import Tensor
 
 # Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, 
 # write a method to rotate the image by 90 degrees. Can you do this in place?
-def rotate_matrix(mtx: torch.Tensor, in_place: bool=False):
+def rotate_matrix(mtx: list, in_place: bool=False):
     print(mtx)
-    N = mtx.shape
+    N = len(mtx)
+
+    result = [list() for _ in range(N)]
+
     if in_place:
-        # TODO: implement implace version
+        # TODO: implement in place version
         current_idx = dest_idx = next_idx = (0, 0)
         num_modified = 0
         while num_modified < N**2:
@@ -22,32 +23,49 @@ def rotate_matrix(mtx: torch.Tensor, in_place: bool=False):
 
             current_idx = dest_idx
 
-        return
+    else:
+        for i in range(N):
+            for j in range(N):
+                result[i].append(mtx[N - 1 - j][i])
 
-    pass
+    return result
+
 
 def main():
+    result = None
+
     while(True):
-        size = int(input("Enter the dimension of the square matrix (N): ").strip())
+        N = int(input("Enter the dimension of the square matrix (N): ").strip())
         elems = [int(i.strip()) for i in input("Now please enter a comma-separated list of the matrix elements row by row: ").strip().split(",")]
-        if len(elems) != size**2:
+
+        if len(elems) != N**2:
             print("Mismatch in number of elements and dimensions, please try again.")
             continue
-        mtx = torch.tensor(elems).view(size, size)
+        
+        mtx = [[[0] for _ in range(N)] for _ in range(N)]
+        elems = iter(elems)
+
+        for i in range(N):
+            for j in range(N):
+                mtx[i][j] = next(elems)
+                
         break
 
     inPlace = input("Would you like this to be an in-place operation? (Yes/No): ").lower().strip()
+
     while(True):
         if inPlace == "yes":
-            inPlace = True
+            result = rotate_matrix(mtx=mtx, in_place=True)
+            break
         elif inPlace == "no":
-            inPlace = False
+            result = rotate_matrix(mtx=mtx, in_place=False)
+            break
         else:
             inPlace = input("Wrong input. Would you like this operation to be in-place? (Yes/No): ").lower().strip()
             continue
-        break
 
-    return rotate_matrix(mtx=mtx, in_place=inPlace)
+    print("Result: \n", result)
+    return result
 
 if __name__ == "__main__":
     main()
