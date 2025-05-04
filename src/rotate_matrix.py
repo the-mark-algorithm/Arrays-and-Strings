@@ -13,7 +13,6 @@ def rotate_matrix(mtx: list, in_place: bool=False):
         start = [0 , 0]
         
         while start[0] <= float((N - 1)) / 2:
-            #TODO: this for loop range gives issues - see 4x4 mtx case
             for k in range(N - 1 - (2 * start[0])):
                 swap_start = (start[0], start[1] + k)
                 curr_loc = swap_start
