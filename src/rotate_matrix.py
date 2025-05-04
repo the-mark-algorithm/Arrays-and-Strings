@@ -3,32 +3,47 @@ import sys
 # Given an image represented by an NxN matrix, where each pixel in the image is 4 bytes, 
 # write a method to rotate the image by 90 degrees. Can you do this in place?
 def rotate_matrix(mtx: list, in_place: bool=False):
-    print(mtx)
+    print("Initial: \n", mtx)
     N = len(mtx)
 
-    result = [list() for _ in range(N)]
+    if N <= 1:
+        return mtx
 
     if in_place:
-        # TODO: implement in place version
-        current_idx = dest_idx = next_idx = (0, 0)
-        num_modified = 0
-        while num_modified < N**2:
+        start = [0 , 0]
+        
+        while start[0] <= float((N - 1)) / 2:
+            #TODO: this for loop range gives issues - see 4x4 mtx case
+            for k in range(N - 1 - (2 * start[0])):
+                swap_start = (start[0], start[1] + k)
+                curr_loc = swap_start
+                curr_val = mtx[curr_loc[0]][curr_loc[1]]
 
-            dest_idx[0] = current_idx[1]
-            dest_idx[1] = N - 1 - current_idx[0]
+                while True:
+                    dest = (curr_loc[1], N - 1 - curr_loc[0])
+                    displace_val = mtx[dest[0]][dest[1]]
+                    
+                    mtx[dest[0]][dest[1]] = curr_val
+                    curr_loc = dest
+                    curr_val = displace_val
 
-            temp = mtx[ dest_idx[0], dest_idx[1] ]
-            mtx[ dest_idx[0], dest_idx[1] ] = mtx[ current_idx[0], current_idx[1] ] if num_modified < 1 else temp
-            num_modified += 1
+                    # if we are back to the same location end loop
+                    if (curr_loc == swap_start):
+                        break
 
-            current_idx = dest_idx
+            start[0] += 1
+            start[1] += 1
+        
+        return mtx
 
     else:
+        result = [list() for _ in range(N)]
+
         for i in range(N):
             for j in range(N):
                 result[i].append(mtx[N - 1 - j][i])
 
-    return result
+        return result
 
 
 def main():
@@ -48,7 +63,7 @@ def main():
         for i in range(N):
             for j in range(N):
                 mtx[i][j] = next(elems)
-                
+
         break
 
     inPlace = input("Would you like this to be an in-place operation? (Yes/No): ").lower().strip()
